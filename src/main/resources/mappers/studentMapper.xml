@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.studentMapper">
+    <resultMap id="BaseResultMap" type="entity.Student">
+        <id property="stuId" column="sid" />
+        <result property="stuNum" column="stu_num" />
+        <result property="stuName" column="stu_name" />
+        <result property="stuGender" column="stu_gender" />
+        <result property="stuAge" column="stu_age" />
+    </resultMap>
+
+
+    <insert id="insertStudent">
+        insert into tb_students(stu_num,stu_name,stu_gender,stu_age)
+        values(#{student.stuNum},#{student.stuName},#{student.stuGender},#{student.stuAge})
+    </insert>
+
+    <delete id="deleteStudent">
+        delete from tb_students where stu_num = #{stuNum}
+    </delete>
+    <select id="selectStuentById" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+            tb_students
+        WHERE
+            sid = #{id}
+    </select>
+    <select id="selectStuentByName" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+            tb_students
+        WHERE
+            stu_name LIKE concat('%',#{name}, '%')
+    </select>
+
+
+</mapper>
